@@ -18,3 +18,4 @@ const std::string WINDOW_NAME = "GalagaSDL2";
 
 const int APPLICATION_WINDOW_WIDTH = 800;
 const int APPLICATION_WINDOW_HEIGTH = 600;
+const int APPLICATION_FRAME_RATE = 60;

@@ -27,6 +27,7 @@ set (GALAGASDL2_GRAPHICS_SOURCE_FILES
 # source files : GameManager
 set (GALAGASDL2_GAMEMANAGER_SOURCE_FILES
     ${GALAGA_APPLICATION_DIR}/GameManager/src/GameManager.cpp
+    ${GALAGA_APPLICATION_DIR}/GameManager/src/Timer.cpp
     )
 
 # Header files : ALL directories

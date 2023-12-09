@@ -61,6 +61,7 @@ Graphics::Graphics()
 Graphics::~Graphics()
 {
     std::cout << "Graphics Distructor called" << std::endl;
+
     SDL_DestroyWindow(mWindow);
     mWindow = nullptr;
 }

@@ -13,7 +13,7 @@
 
 #include "Graphics.h"
 #include "Constants.h"
-
+#include "Timer.h"
 
 class GameManager
 {
@@ -22,15 +22,20 @@ class GameManager
      */
     private:
 
-        static GameManager *sInstance;
+        static GameManager *sInstance;    /**< GameManager class instance. */
 
-        bool mQuit;
-        Graphics *mGraphics;
+        const int FRAME_RATE = APPLICATION_FRAME_RATE; /**< Refresh rate of the graphics. */
 
-        SDL_Event mEvents;
+        bool mQuit;             /**< Boolean tracking Quit event triggered. */ 
+        Graphics *mGraphics;    /**< member Graphics Instance. */
+
+        Timer* mTimer;     /**< member Timer Instance. */
+
+        SDL_Event mEvents;      /**< Last Event sent by SDL_PollEvent. */
 
     /*
-     * Public member methods declaration, mostly static methods respecting the singloton design pattern.
+     * Public member methods declaration, mostly static methods 
+     * respecting the singloton design pattern.
      */
     public:
 
@@ -38,7 +43,6 @@ class GameManager
         static void Release();
 
         void Run();
-
 
     /*
      * Private member methods declaration.

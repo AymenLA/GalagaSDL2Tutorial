@@ -9,4 +9,4 @@ Please note that this is a Linux port using CMake to build, this repository also
 | Video Title | Video link | Date of upload to YT | date of update to documentation |
 | --------------- | ------------------ | -------------- | ------------------|
 | 1. Setting up a Framework for our game | https://www.youtube.com/watch?v=ATa_joa6Gzg | 2-13-2017 | 12-9-2023 |
-
+| 2. Creating a Timer for our game | https://www.youtube.com/watch?v=z9U-Jif4RVU | 2-16-2017 | 12-9-2023 |

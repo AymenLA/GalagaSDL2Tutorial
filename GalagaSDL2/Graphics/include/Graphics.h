@@ -43,7 +43,8 @@ class Graphics
 
 
     /*
-     * Public member methods declaration, mostly static methods respecting the singloton design pattern.
+     * Public member methods declaration, mostly static methods 
+     * respecting the singloton design pattern.
      */
     public:
 

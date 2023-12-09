@@ -19,9 +19,25 @@ set (GALAGASDL2_MAIN_SOURCE_FILE
     ${GALAGA_APPLICATION_DIR}/main.cpp
     )
 
+# source files : Graphics
+set (GALAGASDL2_GRAPHICS_SOURCE_FILES
+    ${GALAGA_APPLICATION_DIR}/Graphics/src/Graphics.cpp
+    )
+
+# source files : GameManager
+set (GALAGASDL2_GAMEMANAGER_SOURCE_FILES
+    ${GALAGA_APPLICATION_DIR}/GameManager/src/GameManager.cpp
+    )
+
+# Header files : ALL directories
+set (GALAGASDL2_INCLUDE_DIRS
+    ${GALAGA_APPLICATION_DIR}/Graphics/include
+    ${GALAGA_APPLICATION_DIR}/GameManager/include
+    )
+
 # constants include directory
 set (CONSTANTS_INCLUDE_DIR 
-    ${GALAGA_APPLICATION_DIR}/constants/include
+    ${GALAGA_APPLICATION_DIR}/Constants/include
     )
 
 # use the provided cmake files for SDL2
@@ -46,11 +62,14 @@ set (SDL2_SPECIFIC_INCLUDE_DIRS
 include_directories(
                     ${SDL2_SPECIFIC_INCLUDE_DIRS}
                     ${CONSTANTS_INCLUDE_DIR}
+                    ${GALAGASDL2_INCLUDE_DIRS}
                     )
 
 # main file will be the master of the opration
 set(TARGET_SOURCES_FILES 
     ${GALAGASDL2_MAIN_SOURCE_FILE}
+    ${GALAGASDL2_GRAPHICS_SOURCE_FILES}
+    ${GALAGASDL2_GAMEMANAGER_SOURCE_FILES}
     )
 
 

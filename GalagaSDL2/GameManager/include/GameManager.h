@@ -14,6 +14,7 @@
 #include "Graphics.h"
 #include "Constants.h"
 #include "Timer.h"
+#include "GameEntity.h"
 
 class GameManager
 {
@@ -32,6 +33,9 @@ class GameManager
         Timer* mTimer;     /**< member Timer Instance. */
 
         SDL_Event mEvents;      /**< Last Event sent by SDL_PollEvent. */
+
+        GameEntity *mParent;
+        GameEntity *mChild;     
 
     /*
      * Public member methods declaration, mostly static methods 

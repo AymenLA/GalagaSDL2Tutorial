@@ -7,6 +7,8 @@ This document lists all the classes of the application and gives a small descrip
   - [Graphics class ](#graphics-class)
   - [GameManager class ](#gamemanager-class)
   - [Timer class ](#timer-class)
+  - [Vector2 class ](#vector2-class)
+  - [GameEntity class ](#gameentity-class)
 
 ## Graphics class <a name="graphics-class"></a>
 
@@ -120,3 +122,91 @@ package "Timer" #DDDDDD {
 }
 @enduml
 ```
+
+## Vector2 class <a name="Vector2-class"></a>
+
+This class is public, it provides basic geometrical operations for vectors. The vector concept here is pretty basic : one point is identified by its x and y coordinates and the second point is always the origin on the imaginary cartesian coordinate system.
+
+This class is public, hence using struct to describe it, it also offers overloads of operator + operator - and operator *. This class is inlined meaning there is no cpp file for it.
+
+- Here is a UML view of of the class: 
+
+<p align="center">
+  <img src="uml_screenshots/uml-Vector2-struct.png" width=70% height=50% />
+</p>
+
+- Here is the equivalent UML code :
+
+```
+@startuml
+package "Vector2" #DDDDDD {
+    struct Vector2 {
+        + Vector2(float, float)
+        + MgnitudeSqr()
+        + Mgnitude()
+        + Normalized()
+    }
+
+    note right of Vector2 
+        This struct has few more functions as operators overload
+        operator + (vector2, vector2)
+        operator - (vector2, vector2)
+        RotateVector (vector2, float)
+    end note
+}
+@endumll
+```
+
+> click [this link](vector2-operations.md) to see the explanation of Vector2 vector rotation operation.
+
+
+## GameEntity class <a name="gameentity-class"></a>
+
+This Class Defines basic operations for defining and manipulating an entity in the application, it uses the class Vector2 to do some basic vector operations (rotation, addition) and allows to define it self as a member in order to link GameEntity objects together for more complexe operations.
+
+- Here is a UML view of of the class: 
+
+<p align="center">
+  <img src="uml_screenshots/uml-GameEntity-class.png" width=50% height=50% />
+</p>
+
+- Here is the equivalent UML code :
+
+```
+@startuml
+package "GameEntity" #DDDDDD {
+    class GameEntity {
+        - mPos
+        - mRotation
+        - mActive
+        - *mParent
+        + GameEntity(float, float)
+        + ~GameEntity(float, float)
+        + Pos(Vector2)
+        + Pos(Space)
+        + Rotation(float)
+        + Rotation(Space)
+        + Active(bool)
+        + Active()
+        + Parent(GameEntity*)
+        + *Parent()
+        + Update()
+        + Render()
+    }
+
+    enum Space {
+        LOCAL = 0
+        WORLD = 1
+    }
+
+    note right of GameEntity 
+        This class offers the following enum Space 
+    end note
+}
+@enduml
+```
+
+
+
+
+ 

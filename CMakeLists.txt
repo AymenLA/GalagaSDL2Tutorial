@@ -30,10 +30,17 @@ set (GALAGASDL2_GAMEMANAGER_SOURCE_FILES
     ${GALAGA_APPLICATION_DIR}/GameManager/src/Timer.cpp
     )
 
+# source files : Entities
+set (GALAGASDL2_ENTITIES_SOURCE_FILES
+    ${GALAGA_APPLICATION_DIR}/Entities/src/GameEntity.cpp
+)
+
 # Header files : ALL directories
 set (GALAGASDL2_INCLUDE_DIRS
+    ${GALAGA_APPLICATION_DIR}/Entities/include
     ${GALAGA_APPLICATION_DIR}/Graphics/include
     ${GALAGA_APPLICATION_DIR}/GameManager/include
+    ${GALAGA_APPLICATION_DIR}/Helpers/include
     )
 
 # constants include directory
@@ -71,6 +78,7 @@ set(TARGET_SOURCES_FILES
     ${GALAGASDL2_MAIN_SOURCE_FILE}
     ${GALAGASDL2_GRAPHICS_SOURCE_FILES}
     ${GALAGASDL2_GAMEMANAGER_SOURCE_FILES}
+    ${GALAGASDL2_ENTITIES_SOURCE_FILES}
     )
 
 

@@ -33,6 +33,7 @@ set (GALAGASDL2_GAMEMANAGER_SOURCE_FILES
 # source files : Entities
 set (GALAGASDL2_ENTITIES_SOURCE_FILES
     ${GALAGA_APPLICATION_DIR}/Entities/src/GameEntity.cpp
+    ${GALAGA_APPLICATION_DIR}/Entities/src/Texture.cpp
 )
 
 # Header files : ALL directories

@@ -52,9 +52,10 @@ void GameManager::Run()
 
         if ((1.0f / FRAME_RATE) <= mTimer->DeltaTime())
         {
-            mParent->Rotation(mParent->Rotation(GameEntity::Space::LOCAL) + 0.1f);
-            std::cout << "Parent rotation: " << mParent->Rotation(GameEntity::Space::LOCAL) << std::endl;
-            std::cout << "Child local pos: (" << mChild->Pos(GameEntity::Space::WORLD).x << ", "<< mChild->Pos(GameEntity::Space::WORLD).y  << ")" << std::endl;
+            mGraphics->ClearBackBuffer();
+
+            mTex->Render();
+            
             mGraphics->Render();
 
             mTimer->Reset();
@@ -77,15 +78,9 @@ GameManager::GameManager()
 
     mTimer = Timer::Instance();
 
-    mParent = new GameEntity(100.0f, 400.0f);
-    mChild = new GameEntity(100.0f, 500.0f);
-
-    std::cout << "Child local pos: (" << mChild->Pos(GameEntity::Space::WORLD).x << ", "<< mChild->Pos(GameEntity::Space::WORLD).y  << ")" << std::endl;
-
-    mChild->Parent(mParent);
-
-    std::cout << "Child local pos: (" << mChild->Pos(GameEntity::Space::WORLD).x << ", "<< mChild->Pos(GameEntity::Space::WORLD).y  << ")" << std::endl;
-
+    std::string path = SDL_GetBasePath();
+    path.append("Assets/galaga-game-collection.png");
+    mTex = new Texture(path);
 }
 
 /******************************************************************************/
@@ -99,6 +94,6 @@ GameManager::~GameManager()
     Timer::Release();
     mTimer = nullptr;
 
-    delete mParent;
-    delete mChild;
+    delete mTex;
+    mTex = nullptr;
 }

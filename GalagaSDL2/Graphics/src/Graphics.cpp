@@ -48,6 +48,34 @@ bool Graphics::Initialized()
     return bInitialized;
 }
 
+
+/******************************************************************************/
+SDL_Texture* Graphics::LoadTexture(std::string path)
+{
+    SDL_Texture* tex = nullptr;
+
+    SDL_Surface* surface = IMG_Load(path.c_str());
+    if (nullptr == surface)
+    {
+        std::cout << "Image Load Error: Path(" << path.c_str() << ")" <<\
+                     " - Error(" << IMG_GetError() << ")" << std::endl;
+
+        return tex;
+    }
+
+    tex = SDL_CreateTextureFromSurface(mRenderer, surface);
+    if (nullptr == tex)
+    {
+        std::cout << "Create Texture Error: " << SDL_GetError() << std::endl;
+        return tex;
+    }
+
+    SDL_FreeSurface(surface);
+
+    return tex;
+}
+
+
 /******************************************************************************/
 Graphics::Graphics()
 {
@@ -62,8 +90,14 @@ Graphics::~Graphics()
 {
     std::cout << "Graphics Distructor called" << std::endl;
 
+    SDL_DestroyRenderer(mRenderer);
+    mRenderer = nullptr;
+
     SDL_DestroyWindow(mWindow);
     mWindow = nullptr;
+
+    IMG_Quit();
+    SDL_Quit();
 }
 
 
@@ -91,6 +125,25 @@ bool Graphics::Init()
         return false;
     }
 
+    mRenderer = SDL_CreateRenderer(mWindow, -1, SDL_RENDERER_ACCELERATED);
+
+    if (nullptr == mRenderer)
+    {
+        std::cout << "SDL Renderer Creation ERROR: " << SDL_GetError() << std::endl;
+        return false;
+    }
+
+    SDL_SetRenderDrawColor(mRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+
+    /** This might change depending on the type of image used */
+    int flags = IMG_INIT_PNG;
+
+    if (!(IMG_Init(flags) & flags))
+    {
+        std::cout << "IMG Initialization ERROR: " << IMG_GetError() << std::endl;
+        return false; 
+    }
+
     mBackBuffer = SDL_GetWindowSurface(mWindow);
 
     return true;
@@ -98,7 +151,21 @@ bool Graphics::Init()
 
 
 /******************************************************************************/
+void Graphics::ClearBackBuffer()
+{
+    SDL_RenderClear(mRenderer);
+}
+
+
+/******************************************************************************/
+void Graphics::DrawTexture(SDL_Texture* tex)
+{
+    SDL_RenderCopy(mRenderer, tex, nullptr, nullptr);
+}
+
+
+/******************************************************************************/
 void Graphics::Render()
 {
-    SDL_UpdateWindowSurface(mWindow);
+    SDL_RenderPresent(mRenderer);
 }

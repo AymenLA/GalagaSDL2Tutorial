@@ -13,6 +13,7 @@
 
 #include "Graphics.h"
 #include "Constants.h"
+#include "Texture.h"
 #include "Timer.h"
 #include "GameEntity.h"
 
@@ -34,8 +35,7 @@ class GameManager
 
         SDL_Event mEvents;      /**< Last Event sent by SDL_PollEvent. */
 
-        GameEntity *mParent;
-        GameEntity *mChild;     
+        Texture* mTex;      /**< Holds the current texture object to draw */
 
     /*
      * Public member methods declaration, mostly static methods 

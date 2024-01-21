@@ -11,7 +11,10 @@
 
 #pragma once
 
+#include <string>
+
 #include <SDL.h>
+#include <SDL_image.h>
 
 #include "Constants.h"
 
@@ -41,6 +44,7 @@ class Graphics
         SDL_Window* mWindow;        /**< SDL window used by the application. */ 
         SDL_Surface* mBackBuffer;   /**< SDL surface used by the application, to be embedded in the application window. */ 
 
+        SDL_Renderer* mRenderer;    /**< SDL renderer used by the application, to render the content of the surface. */
 
     /*
      * Public member methods declaration, mostly static methods 
@@ -60,11 +64,18 @@ class Graphics
          * @return Graphics* 
          */
         static Graphics* Instance();
+
         static void Release();
-        static bool Initialized(); 
+
+        static bool Initialized();
+
+        SDL_Texture* LoadTexture(std::string path);
+
+        void ClearBackBuffer();
+
+        void DrawTexture(SDL_Texture* tex);
 
         void Render();
-
 
     /*
      * Private member methods declaration.

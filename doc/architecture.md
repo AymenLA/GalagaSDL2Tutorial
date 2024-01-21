@@ -9,6 +9,7 @@ This document lists all the classes of the application and gives a small descrip
   - [Timer class ](#timer-class)
   - [Vector2 class ](#vector2-class)
   - [GameEntity class ](#gameentity-class)
+  - [Texture class ](#texture-class)
 
 ## Graphics class <a name="graphics-class"></a>
 
@@ -32,10 +33,15 @@ package "Graphics" #DDDDDD {
         - bInitialized
         - mWindow
         - mBackBuffer
+        - mRenderer
         + Instance()
         + Release()
         + Initilized()
-        - Grqphics()
+        + LoadTexture()
+        + ClearBackBuffer()
+        + DrawTexture()
+        + Render()
+        - Graphics()
         - ~Graphics()
         - Init()
     }
@@ -66,10 +72,12 @@ It uses Graphics and Timer classes to create members instances and handles their
 package "GameManager" #DDDDDD {
     class GameManager {
         - sInstance
+        - FRAME_RATE
         - mQuit
         - mGraphics
         - mTimer
         - mEvents
+        - mTex
         + Instance()
         + Release()
         + Run()
@@ -206,7 +214,40 @@ package "GameEntity" #DDDDDD {
 @enduml
 ```
 
+## Texture class <a name="texture-class"></a>
 
+This class is derived fron GameEntity class, its constructor takes a string path to an image of type png, jpeg or gif. It instantiates a member of type Graphics that gives it access to the low level SDL method IMG_Load and SDL_RenderPresent.
 
+- Here is a UML view of of the class:
 
- 
+<p align="center">
+  <img src="uml_screenshots/uml-Texture-class.png" width=50% height=50% />
+</p>
+
+- Here is the equivalent UML code :
+
+```
+@startuml
+package "Texture" #DDDDDD {
+    class GameEntity {
+        + GameEntity(float, float)
+        + ~GameEntity(float, float)
+    }
+    class Texture {
+        - *mTex
+        - *mGraphics
+        + Texture(float, float)
+        + ~Texture(float, float)
+        + Render()
+    }
+    GameEntity <|-- Texture
+
+    note right of Texture
+        This class Accesses
+        the SDL low level methodes
+        IMG_Load and SDL_RenderPresent
+        through its member mGraphics
+    end note
+}
+@enduml
+```
